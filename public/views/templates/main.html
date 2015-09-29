@@ -1,0 +1,69 @@
+<!-- navbar -->
+<div class="container" id="nav-container">
+  <header class="main-header">
+    <div class="site-logo" href="/">
+      <p>PUB CRAWLER</p>
+    </div>
+  </header>
+</div>
+
+<div class="container"> <!-- start of master container -->
+  
+  <!-- search -->
+  <div class="container" id="search-container">
+    <div class="row">
+      <form ng-submit="submit(); myValue = true" id="search-form" role="form">
+        <div class="form-group move-down">
+          <input type="text" class="form-control" ng-autocomplete ng-model="result" options="options" details="details">
+        </div>
+        <button type="submit" class="btn btn-primary" id="main-button">Create New Assignment</button>
+      </form>
+    </div>
+  </div>
+
+  <div data-ng-if="myValue"> <!-- start hide -->
+    <div class="container"> <!-- main container -->
+      <div class="row"> <!-- main row -->
+
+        <!-- left col -->
+        <div class="col-xs-4" id="venue-column">
+          <div ng-repeat="bar in bars" ng-click="getPictures(bar)" class="well" id="venue-repeat">
+            <li><h6><b>{{bar.venue.name}}</li></h6></b>
+            <a href="{{bar.venue.url}}"><p>{{bar.venue.url}}</a></p>
+            <p>{{bar.venue.contact.formattedPhone}}</p>
+            <p>{{bar.venue.location.formattedAddress.join(" ")}}</p>
+          </div>
+        </div>
+
+        <!-- right col -->
+        <div class="container">
+          <div class="col-xs-8" id="map-column">
+            <map id="map" zoom-to-include-markers='auto' styles="[{stylers:[{hue:'#ded7c6'},{visibility:'simplified'},{gamma:0.5},{weight:0.5}]},{elementType:'labels',stylers:[{visibility:'on'}]},{featureType:'water',stylers:[{color:'#ded7c6'}]}]">
+              <!-- markers -->
+              <marker ng-repeat="bar in bars" on-click="showInfoWindow(event, bar)" position="{{bar.venue.location.lat}},{{bar.venue.location.lng}}" icon="images/mapicon.png">
+              </marker>
+              <shape name="circle" radius="500" center="{{startLocation}}" radius="1000"></shape>
+              <marker position="{{startLocation}}" visible="true" icon="images/start.png"></marker>
+            </map>
+          </div>
+        </div>
+
+      </div> <!-- end of main row -->
+    </div> <!-- end of main container -->
+
+    <div class="container" id="foursquare-pictures">
+      <div class="container" id="pictures-container">
+        <div class="row" id="pictures-row">
+          <div class="col-lg-12">
+            <div class="cover-container">
+              <div ng-repeat="picture in pictures" class="cover-item">
+                <img ng-src="{{picture.prefix}}183x183{{picture.suffix}}">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> <!-- end hide -->
+
+</div> <!-- end of master container -->

@@ -1,0 +1,81 @@
+/*======= Navbar Styling ============*/
+
+#nav-container {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.main-header,
+.nav {
+  flex-direction: column;
+  width: 100%;
+  display: flex;
+}
+
+.main-header {
+  padding-top: .75em;
+  padding-bottom: 0em;
+  background: transparent;
+}
+
+.site-logo {
+  align-self: center;
+  text-align: center;
+  font-size: 90px;
+  font-family: Heineken;
+  color: white;
+  letter-spacing: 2.5px;
+  text-shadow: 3px 3px 12px rgba(0, 0, 0, 1);
+}
+
+.nav a {
+  display: block;
+  color: #FFFFFF;
+  font-size: 1em;
+  font-weight: 300;
+  text-align: center;
+  padding: .4em;
+  border-bottom: 1px solid #797e83;
+}
+
+.nav a:hover {
+  background-color: transparent;
+}
+
+.nav > li > a:hover {
+  color: #797e83;
+  background-color: transparent;
+}
+
+/*======= Media Queries ============*/
+
+@media (min-width: 769px) {
+  .main-header {
+    justify-content: flex-end;
+  }
+  .site-logo {
+    align-self: center;
+  }
+  .nav {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  .nav a {
+    border-bottom-color: transparent;
+  }
+}
+
+@media (min-width: 1025px) {
+  .site-logo {
+    align-self: center;
+  }
+  .nav {
+    margin-top: 0;
+    align-self: center;
+  }
+  .nav li {
+    margin-left: .65em;
+    margin-right: .65em;
+  }
+}

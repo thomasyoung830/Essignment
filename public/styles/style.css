@@ -1,0 +1,151 @@
+/*======= Global Styling ============*/
+
+@font-face {
+  font-family: Heineken;
+  src: url(/fonts/Heineken.ttf);
+}
+
+*:focus {
+  outline: 0 !important;
+}
+
+a {
+  color: rgba(0, 0, 0, 1);
+}
+
+body {
+  background: url(/images/background.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+}
+
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.form-control {
+  margin: auto;
+  max-width: 500px;
+}
+
+/*======= Search Styling ============*/
+
+#search-container {
+  padding-bottom: 20px;
+  text-align: center;
+  width: 100%;
+  background-color: transparent;
+}
+
+/*======= Main Content Styling ============*/
+
+#venue-column {
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 500px;
+  overflow-x: auto;
+}
+
+#map-column {
+  padding-left: 0;
+  padding-right: 0;
+  padding-right: 10px;
+}
+
+#venue-repeat {
+  font-size: 12px;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  background:rgba(214, 140, 18,.7);
+  overflow-x: hidden;
+}
+
+#venue-repeat:hover {
+  -webkit-box-shadow: inset 0 0 1em rgba(18, 12, 8, .6);
+  -moz-box-shadow: inset 0 0 1em rgba(18, 12, 8, .6);
+}
+
+/*======= Horizontal Picture Styling ============*/
+
+#foursquare-pictures {
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 20px;
+}
+
+.col-lg-12 {
+  margin-right: 15px;
+  margin-left: -15px;
+}
+
+#pictures-container {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#pictures-row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.cover-container {
+  height: 183px;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.cover-item {
+  display: inline-block;
+  margin: 8px 8px;
+  width: 183px;
+  height: 183px;
+}
+
+/*======= Button Styling ============*/
+
+#main-button {
+  background-color: transparent;
+  border: 2px solid #FFFFFF;
+}
+
+#main-button:hover {
+  color: #ffffff;
+  background: rgba(214, 140, 18, .7);
+  -webkit-transition: color .55s;
+  -moz-transition:    color .55s;
+  -ms-transition:     color .55s;
+  -o-transition:      color .55s;
+}
+
+/*======= Form Styling ============*/
+
+textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {   
+  border-color: rgba(70, 70, 70, .1);
+  box-shadow: 0 1px 1px rgba(214, 140, 18, 1) inset, 0 0 8px rgba(214, 140, 18, 1);
+}
+
+/*======= Map Styling ============*/
+
+#map {
+  height: 500px;
+  min-width: 470px;
+}
+
+a[href^="http://maps.google.com/maps"]{display:none !important}
+a[href^="https://maps.google.com/maps"]{display:none !important}
+
+.gmnoprint a, .gmnoprint span, .gm-style-cc {
+  display:none;
+}
+.gmnoprint div {
+  background:none !important;
+}

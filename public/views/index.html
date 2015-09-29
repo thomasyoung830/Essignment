@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="pubCrawl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- bootstrap css cdn -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css" rel="stylesheet">
+
+  <!-- custom styles -->
+  <link type="text/css" rel="stylesheet" href="styles/style.css">
+  <link type="text/css" rel="stylesheet" href="styles/nav.css">
+
+  <!-- angular cdn -->
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+
+  <!-- ng route -->
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.min.js"></script>
+  
+  <!-- google maps -->
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?&libraries=places&sensor=false"></script>
+  
+  <!-- jQuery cdn -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+  <!-- bootstrap js cdn -->
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  <!-- custom scripts -->
+  <script type="text/javascript" src="scripts/ngMap.js"></script>
+  <script type="text/javascript" src="scripts/ngAutocomplete.js"></script>
+  <script type="text/javascript" src="scripts/app.js"></script>
+
+  <title>Pub Crawler</title>
+</head>
+
+<body ng-controller="MainCtrl">
+
+  <ng-view></ng-view>
+
+</body>
+</html>
