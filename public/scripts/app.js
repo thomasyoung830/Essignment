@@ -18,8 +18,39 @@ angular.module('pubCrawl', ['ngAutocomplete', 'ngMap', 'ngRoute'])
 
 .controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
 
-  $scope.myValue = false;
+  $scope.myValue = true;
   var markers = [];
+
+  $scope.custom = true;
+      $scope.toggleCustom = function() {
+          $scope.custom = $scope.custom === false ? true: false;
+      };
+
+  // get assignments
+  $scope.getAssignments = function() {
+    var url = "https://api.edmodo.com/assignments?access_token=12e7eaf1625004b7341b6d681fa3a7c1c 551b5300cf7f7f3a02010e99c84695d";
+    $http.get(url)
+      .then(function (response) {
+        $scope.assignments = response.data;
+        $scope.description = $scope.assignments[0].description;
+      })
+  };
+
+  $scope.getDescription = function(assignment) {
+    console.log("hi", assignment);
+    $scope.description = assignment;
+    $scope.getSubmissions(assignment);
+  };
+
+  $scope.getSubmissions = function(assignment) {
+    console.log("submissionssss");
+    var url = "https://api.edmodo.com/assignment_submissions?assignment_id=" + assignment.id + "&assignment_creator_id=73240721&access_token=12e7eaf1625004b7341b6d681fa3a7c1c551b5300cf7f7f3a02010e99c84695d"
+    $http.get(url)
+      .then(function (response) {
+        console.log("were here", response.data);
+        $scope.submissions = response.data;
+      })
+  };
 
   $scope.submit = function () {
 
@@ -43,16 +74,16 @@ angular.module('pubCrawl', ['ngAutocomplete', 'ngMap', 'ngRoute'])
   };
 
   // create markers on map
-  $scope.GenerateMapMarkers = function() {
-    var numMarkers = $scope.bars.length;
-    for (i = 0; i < numMarkers; i++) {
-      var lat = $scope.bars[i].venue.location.lat;
-      var lng = $scope.bars[i].venue.location.lng;
-      var latlng = new google.maps.LatLng(lat, lng);
-      markers[i].setPosition(latlng);
-      markers[i].setMap($scope.map);
-    }
-  };
+  // $scope.GenerateMapMarkers = function() {
+  //   var numMarkers = $scope.bars.length;
+  //   for (i = 0; i < numMarkers; i++) {
+  //     var lat = $scope.bars[i].venue.location.lat;
+  //     var lng = $scope.bars[i].venue.location.lng;
+  //     var latlng = new google.maps.LatLng(lat, lng);
+  //     markers[i].setPosition(latlng);
+  //     markers[i].setMap($scope.map);
+  //   }
+  // };
 
   // create info window on map
   $scope.$on('mapInitialized', function (event, map) {
@@ -83,5 +114,7 @@ angular.module('pubCrawl', ['ngAutocomplete', 'ngMap', 'ngRoute'])
         $scope.pictures = response.data.response.photos.items;
     });
   };
+
+  $scope.getAssignments();
 
 }]);

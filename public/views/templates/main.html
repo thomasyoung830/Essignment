@@ -1,8 +1,8 @@
-<!-- navbar -->
+navbar -->
 <div class="container" id="nav-container">
   <header class="main-header">
     <div class="site-logo" href="/">
-      <p>PUB CRAWLER</p>
+      <p>Homework</p>
     </div>
   </header>
 </div>
@@ -14,7 +14,7 @@
     <div class="row">
       <form ng-submit="submit(); myValue = true" id="search-form" role="form">
         <div class="form-group move-down">
-          <input type="text" class="form-control" ng-autocomplete ng-model="result" options="options" details="details">
+          <!-- <input type="text" class="form-control" ng-autocomplete ng-model="result" options="options" details="details"> -->
         </div>
         <button type="submit" class="btn btn-primary" id="main-button">Create New Assignment</button>
       </form>
@@ -25,28 +25,42 @@
     <div class="container"> <!-- main container -->
       <div class="row"> <!-- main row -->
 
+
         <!-- left col -->
-        <div class="col-xs-4" id="venue-column">
-          <div ng-repeat="bar in bars" ng-click="getPictures(bar)" class="well" id="venue-repeat">
-            <li><h6><b>{{bar.venue.name}}</li></h6></b>
-            <a href="{{bar.venue.url}}"><p>{{bar.venue.url}}</a></p>
-            <p>{{bar.venue.contact.formattedPhone}}</p>
-            <p>{{bar.venue.location.formattedAddress.join(" ")}}</p>
+        <div class="col-xs-3" id="venue-column">
+          <h2>Assignments</h2>
+            <div ng-repeat="assignment in assignments" ng-click="getDescription(assignment)" class="well" id="venue-repeat">
+              <li><h6><b>{{assignment.title}}</li></h6></b>
+              <p>{{assignment.due_at | date: "fullDate"}}</p>
           </div>
         </div>
 
+
+        <!-- right col -->
+    <!--     <div class="container">
+          <div class="col-xs-8 col-xs-offset-1" id="venue-column">
+            <button type="submit" class="btn btn-primary" ngclick="toggleCustom()" id="">Description</button>
+            <button type="submit" class="btn btn-primary" id="">Submissions</button>
+            <span class="well" id="venue-repeat" ng-hide="custom">
+              <h3>{{description.title}} <span class="date">{{description.created_at | date: "fullDate"}}</span></h3>
+              <h4>{{description.description}}</h4>
+            </span>
+            <div ng-show="custom"></div>
+          </div>
+        </div> -->
+
         <!-- right col -->
         <div class="container">
-          <div class="col-xs-8" id="map-column">
-            <map id="map" zoom-to-include-markers='auto' styles="[{stylers:[{hue:'#ded7c6'},{visibility:'simplified'},{gamma:0.5},{weight:0.5}]},{elementType:'labels',stylers:[{visibility:'on'}]},{featureType:'water',stylers:[{color:'#ded7c6'}]}]">
-              <!-- markers -->
-              <marker ng-repeat="bar in bars" on-click="showInfoWindow(event, bar)" position="{{bar.venue.location.lat}},{{bar.venue.location.lng}}" icon="images/mapicon.png">
-              </marker>
-              <shape name="circle" radius="500" center="{{startLocation}}" radius="1000"></shape>
-              <marker position="{{startLocation}}" visible="true" icon="images/start.png"></marker>
-            </map>
+          <div class="col-xs-8 col-xs-offset-1" id="venue-column">
+            <button type="submit" class="btn btn-primary" ng-click="toggleCustom()">Description</button>
+              <div ng-hide="custom" class="well" id="venue-repeat">
+                <h3>{{description.title}} <span class="date">{{description.created_at | date: "fullDate"}}</span></h3>
+                <h4>{{description.description}}</h4>
+              </div>
+              <span ng-show="custom"></span>
           </div>
         </div>
+
 
       </div> <!-- end of main row -->
     </div> <!-- end of main container -->
@@ -66,4 +80,4 @@
     </div>
   </div> <!-- end hide -->
 
-</div> <!-- end of master container -->
+</div> <!-- end of master container

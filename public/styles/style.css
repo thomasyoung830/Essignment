@@ -45,6 +45,11 @@ body {
 
 /*======= Main Content Styling ============*/
 
+.date {
+  float: right;
+  font-size: 20px;
+}
+
 #venue-column {
   padding-left: 0px;
   padding-right: 0px;
