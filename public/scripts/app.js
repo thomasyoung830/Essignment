@@ -1,6 +1,6 @@
 angular.module('homework', ['ui.router', 'ui.bootstrap'])
 
-  // This is the router  ========================================
+  // This is the router  ==========================================>
   .config(function($stateProvider, $urlRouterProvider) {
     // if url not landing or display, show landing page
     $urlRouterProvider.otherwise('/landing');
@@ -37,9 +37,8 @@ angular.module('homework', ['ui.router', 'ui.bootstrap'])
 
   })
 
-
+    // Factory to get data from API ==========================================>
   .factory('dataFactory', function ($http) {
-  // Your code here
     var assignments =[];
     var ids = [];
     var getAllAssignments = function() {
@@ -77,31 +76,26 @@ angular.module('homework', ['ui.router', 'ui.bootstrap'])
   })
 
 
-  // This is the Main Controller  ========================================
+  // This is the Main Controller  ========================================>
   .controller('MainCtrl', ['$scope', 'dataFactory', '$http', '$modal', '$log', function($scope, dataFactory, $http, $modal, $log) {
 
     $scope.myValue = true;
 
-    // get assignments
   
-
     $scope.getDescription = function(assignment) {
       $scope.description = assignment;
       $scope.getSubmissions(assignment);
-      console.log("finished");
     };
-
-    
 
     $scope.getSubmissions = function(assignment) {
       var url = "https://api.edmodo.com/assignment_submissions?assignment_id=" + assignment.id + "&assignment_creator_id=73240721&access_token=12e7eaf1625004b7341b6d681fa3a7c1c551b5300cf7f7f3a02010e99c84695d"
       $http.get(url)
         .then(function (response) {
-          console.log("were here", response.data);
           $scope.submissions = response.data;
         })
     };
 
+    //this gets the content for the submission clicked
     $scope.getContent = function(submission) {
       var submissions = $scope.submissions;
       for (var i = 0; i < submissions.length; i++) {
@@ -111,10 +105,12 @@ angular.module('homework', ['ui.router', 'ui.bootstrap'])
       }
     };
 
+    //this is to toggle the submission content for each student
     $scope.buttonToggle = function(buttonNumber) {
       this.pickChosen = buttonNumber === this.pickChosen ? 0 : buttonNumber;
     };
 
+    //this is used to highlight the selected assignment in the assignment column
     $scope.setSelected = function() {
      if ($scope.lastSelected) {
        $scope.lastSelected.selected = '';
@@ -124,55 +120,37 @@ angular.module('homework', ['ui.router', 'ui.bootstrap'])
     };
 
     $scope.initialize = function() {
-      // var url = "https://api.edmodo.com/assignments?access_token=12e7eaf1625004b7341b6d681fa3a7c1c551b5300cf7f7f3a02010e99c84695d";
-      // $http.get(url)
-      //   .then(function (response) {
-      //     $scope.assignments = response.data;
-      //   })
-      $scope.assignments = [1,2,3];
       $scope.getAssignments = dataFactory.getAllAssignments;
       $scope.getAssignments();
       $scope.assignments = dataFactory.assignments;
       console.log("this is the assignments", $scope.assignments);
-      
     };
 
+    //initialized to get the assignments to show up
     $scope.initialize();
 
-    setInterval(function() {
-      $scope.initializ
-    }, 1000);
 
-
-    $scope.animationsEnabled = true;
-
-
-    $scope.open = function (size) {
-
+    //used to open the model when create new assignment is clicked
+    $scope.open = function () {
       var modalInstance = $modal.open({
-        animation: $scope.animationsEnabled,
         templateUrl: '/views/templates/modal.html',
         controller: 'ModalInstanceCtrl',
-        size: size
       });
     };
 
-    $scope.toggleAnimation = function () {
-      $scope.animationsEnabled = !$scope.animationsEnabled;
-    };
 
 }])
 
+// This is the controller for the modal  ==========================================>
 .controller('ModalInstanceCtrl', function ($scope, $modalInstance, dataFactory) {
     
-
+    //this creates a new assignment and adds it to the bar
     $scope.create = function (assignment) {
-      // dataFactory.assignments.push(assignment);
-      console.log('helllooo');
       dataFactory.addAssignment(assignment);
       $modalInstance.close();
     };
 
+    //closes modal when cancel is clicked
     $scope.cancel = function () {
       $modalInstance.dismiss('cancel');
     };
