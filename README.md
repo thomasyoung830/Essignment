@@ -3,5 +3,9 @@ Single­-page client­-side application that allows a teacher to browse homework
 
 Instructions to Start:
 1) Run NPM Start 
+
+
 2) Go to Localhost 8000
+
+
 3) Click a Assignment to view description or submissions
