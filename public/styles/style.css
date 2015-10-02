@@ -1,9 +1,6 @@
 /*======= Global Styling ============*/
 
-@font-face {
-  font-family: Heineken;
-  src: url(/fonts/Heineken.ttf);
-}
+
 
 *:focus {
   outline: 0 !important;
@@ -34,14 +31,6 @@ body {
   max-width: 500px;
 }
 
-/*======= Search Styling ============*/
-
-#search-container {
-  padding-bottom: 20px;
-  text-align: center;
-  width: 100%;
-  background-color: transparent;
-}
 
 /*======= Main Content Styling ============*/
 
@@ -50,11 +39,12 @@ body {
   font-size: 20px;
 }
 
-#venue-column {
+#assignment-column {
+  color: white;
   padding-left: 0px;
   padding-right: 0px;
-  height: 500px;
-  overflow-x: auto;
+  height: 800px;
+  overflow-x: hidden;
 }
 
 #map-column {
@@ -63,59 +53,66 @@ body {
   padding-right: 10px;
 }
 
-#venue-repeat {
-  font-size: 12px;
-  padding-top: 0;
-  padding-bottom: 0;
+#assignment-repeat {
+  font-size: 20px;
+  font-color: white;
+  padding-top: 25px;
+  padding-bottom: 25px;
   margin-bottom: 0;
-  background:rgba(214, 140, 18,.7);
+  background:rgba(255, 255, 255);
+  background: transparent;
   overflow-x: hidden;
 }
 
-#venue-repeat:hover {
+#assignment-repeat:hover {
   -webkit-box-shadow: inset 0 0 1em rgba(18, 12, 8, .6);
   -moz-box-shadow: inset 0 0 1em rgba(18, 12, 8, .6);
 }
 
-/*======= Horizontal Picture Styling ============*/
-
-#foursquare-pictures {
-  padding-left: 0;
-  padding-right: 0;
-  padding-bottom: 20px;
+.tab2 {
+  margin-left: 15px;
 }
 
-.col-lg-12 {
-  margin-right: 15px;
-  margin-left: -15px;
+.assignment {
+  font-size: 23px;
 }
 
-#pictures-container {
-  padding-left: 0;
-  padding-right: 0;
-  margin-left: 0;
-  margin-right: 0;
+.date2 {
+  font-size: 15px;
+  position: left;
 }
 
-#pictures-row {
-  margin-left: 0;
-  margin-right: 0;
+.highlighted {
+  background-color: blue;
 }
 
-.cover-container {
-  height: 183px;
-  white-space: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
+.selected {
+  color: #FF9800;
 }
-.cover-item {
-  display: inline-block;
-  margin: 8px 8px;
-  width: 183px;
-  height: 183px;
+
+.description {
+  padding-top: 10px;
 }
+
+.center {
+  position: center;
+  font-size: 45px;
+}
+
+.right-side {
+  padding-top: 40px;
+}
+
 
 /*======= Button Styling ============*/
+
+.folder {
+  background-color: #FF9800;
+}
+
+.btn-primary {
+  /*background-color: #FF9800;*/
+}
 
 #main-button {
   background-color: transparent;
@@ -138,19 +135,30 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
   box-shadow: 0 1px 1px rgba(214, 140, 18, 1) inset, 0 0 8px rgba(214, 140, 18, 1);
 }
 
-/*======= Map Styling ============*/
+/*======= Profile Styling ============*/
 
-#map {
-  height: 500px;
-  min-width: 470px;
+#userStats { display: block; 
+  width: auto; -moz-border-radius: 5px; 
+  -webkit-border-radius: 5px; 
+  border-radius: 5px; 
+  padding: 12px; 
+}
+ 
+#userStats .pic { 
+  float: left; 
+  display: block; 
+  margin-right: 10px; 
+  padding: 7px; 
+  background: #fff; 
+  border: 1px solid #ccc;
 }
 
-a[href^="http://maps.google.com/maps"]{display:none !important}
-a[href^="https://maps.google.com/maps"]{display:none !important}
 
-.gmnoprint a, .gmnoprint span, .gm-style-cc {
-  display:none;
+.content {
+  font-size: 18px;
+  /*background-color: #E3D59B;*/
 }
-.gmnoprint div {
-  background:none !important;
+
+.right {
+  float: right;
 }

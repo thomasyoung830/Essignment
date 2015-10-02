@@ -1,120 +1,179 @@
-angular.module('pubCrawl', ['ngAutocomplete', 'ngMap', 'ngRoute'])
+angular.module('homework', ['ui.router', 'ui.bootstrap'])
 
-.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-  $routeProvider
-    .when('/', {
-      templateUrl: 'views/templates/main.html',
-      controller: 'MainCtrl'
-    })
-    .otherwise({
-      redirectTo: '/'
-    });
+  // This is the router  ========================================
+  .config(function($stateProvider, $urlRouterProvider) {
+    // if url not landing or display, show landing page
+    $urlRouterProvider.otherwise('/landing');
 
-    $locationProvider.html5Mode({
-      enabled: true,
-      requireBase: false
-    });
-  }])
+    $stateProvider
 
-.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
-
-  $scope.myValue = true;
-  var markers = [];
-
-  $scope.custom = true;
-      $scope.toggleCustom = function() {
-          $scope.custom = $scope.custom === false ? true: false;
-      };
-
-  // get assignments
-  $scope.getAssignments = function() {
-    var url = "https://api.edmodo.com/assignments?access_token=12e7eaf1625004b7341b6d681fa3a7c1c 551b5300cf7f7f3a02010e99c84695d";
-    $http.get(url)
-      .then(function (response) {
-        $scope.assignments = response.data;
-        $scope.description = $scope.assignments[0].description;
+      // Initial view for seeing assignments  
+      .state('landing', {
+        url: '/landing',
+        templateUrl: '/views/templates/landing.html',
+        controller: 'MainCtrl',
       })
-  };
 
-  $scope.getDescription = function(assignment) {
-    console.log("hi", assignment);
-    $scope.description = assignment;
-    $scope.getSubmissions(assignment);
-  };
-
-  $scope.getSubmissions = function(assignment) {
-    console.log("submissionssss");
-    var url = "https://api.edmodo.com/assignment_submissions?assignment_id=" + assignment.id + "&assignment_creator_id=73240721&access_token=12e7eaf1625004b7341b6d681fa3a7c1c551b5300cf7f7f3a02010e99c84695d"
-    $http.get(url)
-      .then(function (response) {
-        console.log("were here", response.data);
-        $scope.submissions = response.data;
+      // The view showing assignment description  
+      .state('landing.description', {
+        url: '/description',
+        templateUrl: '/views/templates/description.html',
+        controller: 'MainCtrl'
       })
-  };
 
-  $scope.submit = function () {
+      // The view showing assignment submissions
+      .state('landing.submissions', {
+        url: '/submissions',
+        templateUrl: '/views/templates/submissions.html',
+        controller: 'MainCtrl'
+      })
 
-    // send user's location to foursquare API
-    $scope.startLocation = $scope.details.geometry.location.toString().replace(/\s+/, '').slice(1, -1);
-    var url = 'https://api.foursquare.com/v2/venues/explore?client_id=0LQEK2QFONRMHNYOBLU4ZEMSGKGWAB5J51O4JB0DPYRNW41G&client_secret=JYZ2IHWEDEKK5A3HNQKO4ELARI55YOJP0LFOF1NFM3R3LY5Z&v=20150901&ll=' + $scope.startLocation + '&query=drinks&limit=10&radius=1500';
-    $http.get(url)
-      .then(function (response) {
-        $scope.bars = response.data.response.groups[0].items;
+         // The view showing assignment submission's content 
+      .state('landing.submissions.content', {
+        url: '/content',
+        templateUrl: '/views/templates/submissions.content.html',
+        controller: 'MainCtrl'
+      })
 
-        // loop map markers
-        for (var i=0; i < $scope.bars.length; i++) {
-          markers[i] = new google.maps.Marker({
-            // title: "Hi marker" + i
-          });
+  })
+
+
+  .factory('dataFactory', function ($http) {
+  // Your code here
+    var assignments =[];
+    var ids = [];
+    var getAllAssignments = function() {
+      return $http({
+        method: "GET",
+        url: "https://api.edmodo.com/assignments?access_token=12e7eaf1625004b7341b6d681fa3a7c1c551b5300cf7f7f3a02010e99c84695d"
+      })
+      .then(function(resp) {
+        var data = resp.data;
+        console.log("assignments!! :", assignments);
+        for (var i = 0; i < data.length; i++) {
+          if (ids.indexOf(data[i].id) === -1) {
+            ids.push(data[i].id);
+            assignments.push(data[i]);
+          }
         }
+      });
+    };
 
-        // generate map markers
-        $scope.GenerateMapMarkers();
-    });
-  };
+    var addAssignment = function(assignment) {
+      assignments.push(assignment);
+      console.log('im being added', assignments);
+    };
 
-  // create markers on map
-  // $scope.GenerateMapMarkers = function() {
-  //   var numMarkers = $scope.bars.length;
-  //   for (i = 0; i < numMarkers; i++) {
-  //     var lat = $scope.bars[i].venue.location.lat;
-  //     var lng = $scope.bars[i].venue.location.lng;
-  //     var latlng = new google.maps.LatLng(lat, lng);
-  //     markers[i].setPosition(latlng);
-  //     markers[i].setMap($scope.map);
-  //   }
-  // };
+    var updateAssignments = function() {
 
-  // create info window on map
-  $scope.$on('mapInitialized', function (event, map) {
-    $scope.objMapa = map;
-  });
+    };
 
-  $scope.showInfoWindow = function (event, bar) {
-    if ($scope.infowindow) {
-      $scope.infowindow.close();
-    }
-    $scope.infowindow = new google.maps.InfoWindow();
-    var center = new google.maps.LatLng(bar.venue.location.lat,bar.venue.location.lng);
+    return {
+      getAllAssignments: getAllAssignments,
+      assignments: assignments,
+      addAssignment: addAssignment
+    };
 
-    $scope.infowindow.setContent(
-      '<small>' + bar.venue.name + '</small>' + '<br>' +
-      '<small>' + bar.venue.location.formattedAddress.join(" ") + '</small>');
+  })
 
-    $scope.infowindow.setPosition(center);
-    $scope.infowindow.open($scope.objMapa);
-  };
 
-  // get foursquare pictures
-  $scope.getPictures = function (bar) {
-    var foursquareId = bar.venue.id;
-    var url = 'https://api.foursquare.com/v2/venues/' + foursquareId +'/photos?client_id=0LQEK2QFONRMHNYOBLU4ZEMSGKGWAB5J51O4JB0DPYRNW41G&client_secret=JYZ2IHWEDEKK5A3HNQKO4ELARI55YOJP0LFOF1NFM3R3LY5Z&v=20150901';
-    $http.get(url)
-      .then(function (response) {
-        $scope.pictures = response.data.response.photos.items;
-    });
-  };
+  // This is the Main Controller  ========================================
+  .controller('MainCtrl', ['$scope', 'dataFactory', '$http', '$modal', '$log', function($scope, dataFactory, $http, $modal, $log) {
 
-  $scope.getAssignments();
+    $scope.myValue = true;
 
-}]);
+    // get assignments
+  
+
+    $scope.getDescription = function(assignment) {
+      $scope.description = assignment;
+      $scope.getSubmissions(assignment);
+      console.log("finished");
+    };
+
+    
+
+    $scope.getSubmissions = function(assignment) {
+      var url = "https://api.edmodo.com/assignment_submissions?assignment_id=" + assignment.id + "&assignment_creator_id=73240721&access_token=12e7eaf1625004b7341b6d681fa3a7c1c551b5300cf7f7f3a02010e99c84695d"
+      $http.get(url)
+        .then(function (response) {
+          console.log("were here", response.data);
+          $scope.submissions = response.data;
+        })
+    };
+
+    $scope.getContent = function(submission) {
+      var submissions = $scope.submissions;
+      for (var i = 0; i < submissions.length; i++) {
+        if (submissions[i].id === submission.id) {
+          $scope.content = submission.content;
+        }
+      }
+    };
+
+    $scope.buttonToggle = function(buttonNumber) {
+      this.pickChosen = buttonNumber === this.pickChosen ? 0 : buttonNumber;
+    };
+
+    $scope.setSelected = function() {
+     if ($scope.lastSelected) {
+       $scope.lastSelected.selected = '';
+     }
+     this.selected = 'selected';
+     $scope.lastSelected = this;
+    };
+
+    $scope.initialize = function() {
+      // var url = "https://api.edmodo.com/assignments?access_token=12e7eaf1625004b7341b6d681fa3a7c1c551b5300cf7f7f3a02010e99c84695d";
+      // $http.get(url)
+      //   .then(function (response) {
+      //     $scope.assignments = response.data;
+      //   })
+      $scope.assignments = [1,2,3];
+      $scope.getAssignments = dataFactory.getAllAssignments;
+      $scope.getAssignments();
+      $scope.assignments = dataFactory.assignments;
+      console.log("this is the assignments", $scope.assignments);
+      
+    };
+
+    $scope.initialize();
+
+    setInterval(function() {
+      $scope.initializ
+    }, 1000);
+
+
+    $scope.animationsEnabled = true;
+
+
+    $scope.open = function (size) {
+
+      var modalInstance = $modal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: '/views/templates/modal.html',
+        controller: 'ModalInstanceCtrl',
+        size: size
+      });
+    };
+
+    $scope.toggleAnimation = function () {
+      $scope.animationsEnabled = !$scope.animationsEnabled;
+    };
+
+}])
+
+.controller('ModalInstanceCtrl', function ($scope, $modalInstance, dataFactory) {
+    
+
+    $scope.create = function (assignment) {
+      // dataFactory.assignments.push(assignment);
+      console.log('helllooo');
+      dataFactory.addAssignment(assignment);
+      $modalInstance.close();
+    };
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
+ });

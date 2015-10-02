@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="pubCrawl">
+<html lang="en" ng-app="homework">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,11 +14,9 @@
   <!-- angular cdn -->
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
 
-  <!-- ng route -->
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.min.js"></script>
-  
-  <!-- google maps -->
-  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?&libraries=places&sensor=false"></script>
+  <!-- ui-router -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+
   
   <!-- jQuery cdn -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -26,9 +24,13 @@
   <!-- bootstrap js cdn -->
   <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
+ <!-- angular bootstrap js cdn -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.4/ui-bootstrap-tpls.min.js"></script>
+  
+
   <!-- custom scripts -->
-  <script type="text/javascript" src="scripts/ngMap.js"></script>
-  <script type="text/javascript" src="scripts/ngAutocomplete.js"></script>
+
+  <!-- // <script type="text/javascript" src="scripts/state-config.js"></script> -->
   <script type="text/javascript" src="scripts/app.js"></script>
 
   <title>Homework</title>
@@ -36,7 +38,7 @@
 
 <body ng-controller="MainCtrl">
 
-  <ng-view></ng-view>
+  <ui-view></ui-view>
 
 </body>
 </html>
