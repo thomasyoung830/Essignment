@@ -8,7 +8,6 @@
 	        <h1>{{submission.creator.first_name}} {{submission.creator.last_name}}</h1>
 	        <h1></h1>
 	        <h5>Submitted on {{submission.submitted_at | date: "fullDate"}}</h5>
-	        <!-- <span class="right" ng-show="!showDetails" ng-click="showDetails = ! showDetails">See More</span> -->
 	        <span class="right" ng-show="!showDetails" ng-click="showDetails = ! showDetails"><img src="../../../images/up.png" class="right"></span>
 	        <span class="right" ng-show="showDetails" ng-click="showDetails = ! showDetails"><img src="../../../images/down.png" class="right"></span>
 	      </div>
