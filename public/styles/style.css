@@ -43,7 +43,7 @@ body {
   color: white;
   padding-left: 0px;
   padding-right: 0px;
-  height: 800px;
+  /*height: 800px;*/
   overflow-x: hidden;
 }
 
@@ -88,6 +88,14 @@ body {
 
 .selected {
   color: #FF9800;
+}
+
+.descSelected {
+  background-color: #FF9800;
+}
+
+.subSelected {
+  background-color: #FF9800;
 }
 
 .description {

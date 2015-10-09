@@ -30,7 +30,7 @@
         <!-- left col -->
         <div class="col-xs-3" id="assignment-column">
           <h2 class="center"><b>Assignments</b></h2>
-            <div ng-repeat="assignment in assignments" ng-click="getDescription(assignment); setSelected();" class="well {{selected}}" id="assignment-repeat">
+            <div ng-repeat="assignment in assignments" ng-init="getDescription(assignment); selectFirst(assignment);" value="{{assignment1}}" ng-click="getDescription(assignment); setSelected();" class="well {{selected}}" id="assignment-repeat">
               <p class="assignment"><b>{{assignment.title}}</b></p>
               <p class="date2">{{assignment.due_at | date: "fullDate"}}</p>
             </div>
@@ -39,8 +39,8 @@
 
         <!-- right col -->
         <div class="container right-side">
-          <button type="button" class="btn col-xs-2 col-xs-offset-1" data-ng-class="[pickChosen == 1 ? 'btn-warning' : 'btn-primary']" data-ng-click="buttonToggle(1);" ui-sref="landing.description">Description</button>
-          <button type="button" class="btn col-xs-2 tab2" data-ng-class="[pickChosen == 2 ? 'btn-warning' : 'btn-primary']" data-ng-click="buttonToggle(2);" ui-sref="landing.submissions">Submissions</button>
+          <button type="button" class="btn col-xs-2 col-xs-offset-1 {{descSelected}}" ng-init="setDescSelected();" ng-click="unSelect(); setDescSelected();" ui-sref="landing.description">Description</button>
+          <button type="button" class="btn col-xs-2 tab2 {{subSelected}}" ng-click="unSelect(); setSubSelected(); getSubmissions(assignment);" ui-sref="landing.submissions">Submissions</button>
           <div class="col-xs-8 col-xs-offset-1" id="assignment-column" ui-view>
           <div class="well" id="assignment-repeat">
             <h2>Get Assignment</h2>

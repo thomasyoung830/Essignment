@@ -1,10 +1,10 @@
 angular.module('homework.modalInstance', [])
 // This is the controller for the modal  ==========================================>
-.controller('assignmentCtrl', function ($scope, $modalInstance, dataFactory) {
+.controller('assignmentCtrl', function ($scope, $modalInstance, assignmentFactory) {
     
     //this creates a new assignment and adds it to the bar
     $scope.create = function (assignment) {
-      dataFactory.addAssignment(assignment);
+      assignmentFactory.addAssignment(assignment);
       $modalInstance.close();
     };
 
