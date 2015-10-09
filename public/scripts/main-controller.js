@@ -5,13 +5,14 @@ angular.module('homework.main', [])
 
     $scope.myValue = true;
 
-  
+    //gets a description for a specific assignment
     $scope.getDescription = function(assignment) {
       $scope.description = assignment;
       $scope.current = assignment;
       $scope.getSubmissions(assignment);
     };
 
+    //retrieves all the submissions
     $scope.getAllSubmissions = function() {
       $scope.getSubs = submissionFactory.getAllSubmissions;
       for (var i = 0; i < $scope.assignments.length; i++) {
@@ -20,6 +21,7 @@ angular.module('homework.main', [])
       $scope.subs = submissionFactory.submissions;
     }
 
+    //gets all the submissions
     $scope.getSubmissions = function(assignment) {
       $scope.submissions = [];
       for (var i = 0; i < $scope.subs.length; i++) {
@@ -44,11 +46,6 @@ angular.module('homework.main', [])
       this.pickChosen = buttonNumber === this.pickChosen ? 0 : buttonNumber;
     };
 
-    $scope.selectFirst = function(assignment) {
-      if (assignment === $scope.assignments[0]) {
-        this.selected = 'selected';
-      } 
-    };
 
     //this is used to highlight the selected assignment in the assignment column
     $scope.setSelected = function() {
@@ -57,24 +54,16 @@ angular.module('homework.main', [])
      }
      this.selected = 'selected';
      $scope.lastSelected = this;
+     $scope.firstSelected = '';
     };
 
+    //this is used to highlight a description
     $scope.setDescSelected = function() {
-     // if ($scope.lastdescSelected) {
-     //   $scope.lastdescSelected.selected = '';
-     // }
      $scope.descSelected = 'descSelected';
-     // $scope.lastdescSelected = this;
-     // $scope.lastsubSelected = 'off';
     };
 
     $scope.setSubSelected = function() {
-     // if ($scope.lastsubSelected) {
-     //   $scope.lastsubSelected.selected = '';
-     // }
      $scope.subSelected = 'subSelected';
-     // $scope.lastsubSelected = this;
-     // $scope.descSelected = 'off';
     };
 
     $scope.unSelect = function() {

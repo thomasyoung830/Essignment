@@ -10,6 +10,6 @@ app.get('/', function (req, res) {
 });
 
 // listen on port 3000
-app.listen(process.env.PORT || 8000, function () {
-  console.log('server started on localhost:8000');
+app.listen(process.env.PORT || 3000, function () {
+  console.log('server started on localhost:3000');
 });
