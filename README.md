@@ -10,4 +10,4 @@ Instructions to Start:
 2) Go to Localhost 3000
 
 
-3) Click a Assignment to view description or submissions
+3) Click Description or Submission and then choose an Assignment
