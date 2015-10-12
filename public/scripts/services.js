@@ -1,4 +1,4 @@
-angular.module('homework.services', [])
+angular.module('essignment.services', [])
 
     // Factory to get data from API ==========================================>
   .factory('assignmentFactory', function ($http) {

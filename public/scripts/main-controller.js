@@ -1,4 +1,4 @@
-angular.module('homework.main', [])
+angular.module('essignment.main', [])
 
 
  .controller('mainCtrl', ['$scope', 'assignmentFactory', 'submissionFactory', '$http', '$modal', '$log', function($scope, assignmentFactory, submissionFactory, $http, $modal, $log, $window) {

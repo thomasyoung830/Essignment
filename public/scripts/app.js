@@ -1,8 +1,8 @@
-angular.module('homework', ['ui.router', 
+angular.module('essignment', ['ui.router', 
   'ui.bootstrap', 
-  'homework.services', 
-  'homework.modalInstance', 
-  'homework.main'])
+  'essignment.services', 
+  'essignment.modalInstance', 
+  'essignment.main'])
 
 
 

@@ -1,4 +1,4 @@
-angular.module('homework.modalInstance', [])
+angular.module('essignment.modalInstance', [])
 // This is the controller for the modal  ==========================================>
 .controller('assignmentCtrl', function ($scope, $modalInstance, assignmentFactory) {
     

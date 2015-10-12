@@ -1,4 +1,4 @@
-angular.module('homework')
+angular.module('essignment')
 
   // This is the router  ==========================================>
   .config(function($stateProvider, $urlRouterProvider) {
