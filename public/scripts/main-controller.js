@@ -1,7 +1,7 @@
 angular.module('homework.main', [])
 
 
- .controller('mainCtrl', ['$scope', 'assignmentFactory', 'submissionFactory', '$http', '$modal', '$log', function($scope, assignmentFactory, submissionFactory, $http, $modal, $log) {
+ .controller('mainCtrl', ['$scope', 'assignmentFactory', 'submissionFactory', '$http', '$modal', '$log', function($scope, assignmentFactory, submissionFactory, $http, $modal, $log, $window) {
 
     $scope.myValue = true;
 
@@ -19,7 +19,7 @@ angular.module('homework.main', [])
         $scope.getSubs($scope.assignments[i]);
       }
       $scope.subs = submissionFactory.submissions;
-    }
+    };
 
     //gets all the submissions
     $scope.getSubmissions = function(assignment) {
@@ -29,7 +29,10 @@ angular.module('homework.main', [])
           $scope.submissions.push($scope.subs[i]);
         }
       }
-    }
+      if ($scope.submissions.length === 0) {
+        $scope.submissions
+      }
+    };
 
     //this gets the content for the submission clicked
     $scope.getContent = function(submission) {
