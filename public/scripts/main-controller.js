@@ -46,7 +46,6 @@ angular.module('homework.main', [])
       this.pickChosen = buttonNumber === this.pickChosen ? 0 : buttonNumber;
     };
 
-
     //this is used to highlight the selected assignment in the assignment column
     $scope.setSelected = function() {
      if ($scope.lastSelected) {
@@ -62,10 +61,12 @@ angular.module('homework.main', [])
      $scope.descSelected = 'descSelected';
     };
 
+    //this is used to show the submissions
     $scope.setSubSelected = function() {
      $scope.subSelected = 'subSelected';
     };
 
+    //this closes the deselects an assignment or submissions being shown
     $scope.unSelect = function() {
       if ($scope.descSelected) {
         $scope.descSelected = false;
@@ -75,6 +76,7 @@ angular.module('homework.main', [])
       }
     };
 
+    //this will populate the assignments upon launch
     $scope.initialize = function() {
       $scope.getAssignments = assignmentFactory.getAllAssignments;
       $scope.getAssignments();

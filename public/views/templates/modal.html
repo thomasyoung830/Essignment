@@ -1,17 +1,35 @@
-<div class="modal-header">
-    <h3 class="modal-title">Create New Assignment</h3>
-        </div>
-        <div class="modal-body">
-            <form novalidate class="simple-form">
-                Assignment Title: <br /><textarea cols="65" type="text" ng-model="assignment.title"> </textarea> <br />
-                Assignment Description: <br />
-                <textarea rows="4" cols="65" id="textareaEdit" ng-model="assignment.description"></textarea> <br />
-                Due Date: <br /><input type="date" ng-model="assignment.due_at" /><br />
-          </form>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="create(assignment)">Create</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-        </div>
+<div class="container modal-header">
+<div class="row">  
+   
+<div class="col-sm-6">
+    <!-- FORM ============ -->
+  
+    <form name="userForm" class="modal-body" novalidate>
 
-</div>
+        <!-- Assignment Title -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+            <label>Assignment Title</label>
+            <input type="text" name="name" class="form-control" ng-model="assignment.title" required ng-minlength="3">
+            <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Assignment Title Required.</p>
+        </div>
+      
+        <!-- Assignment Description -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
+            <label>Assignment Description</label>
+            <textarea row="4" cols="65" id="textareaEdit" name="username" class="form-control" ng-model="assignment.description" ng-minlength="3" required></textarea>
+            <p ng-show="userForm.username.$error.minlength" class="help-block">Description is too short.</p>
+            <p ng-show="userForm.username.$error.maxlength" class="help-block">Description is too long.</p>
+        </div>
+        
+        <!-- Assignment Due Date -->
+        <div class="form-group">
+            <label>Assignment Due Date</label>
+            <input type="date" name="email" class="form-control" ng-model="assignment.due_at" required>
+            <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Pick A Due Date</p>
+        </div>
+        
+        <button type="submit" class="btn btn-primary modal-footer" ng-disabled="userForm.$invalid" ng-click="create(assignment);">Submit</button>
+        <button type="" class="btn btn-warning modal-footer"  ng-click="cancel()">Cancel</button>
+        
+    </form>
+  </div>
