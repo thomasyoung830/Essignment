@@ -147,6 +147,13 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
   box-shadow: 0 1px 1px rgba(214, 140, 18, 1) inset, 0 0 8px rgba(214, 140, 18, 1);
 }
 
+.modal-header {
+  max-width: 598px !important;
+}
+
+.modal-body {
+  max-width: 595px !important;
+}
 /*======= Profile Styling ============*/
 
 #userStats { display: block; 
